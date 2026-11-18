@@ -1,0 +1,43 @@
+/* Shared by every style: numbering counters (skipping abstract and bibliography), lists, code, figures, tables. */
+.paper-pdf { --sans: "Source Sans Pro", "Source Sans 3", Helvetica, Arial, sans-serif; --serif-cr: "Crimson Text", Crimson, Georgia, serif; --serif: "Latin Modern Roman", "CMU Serif", "Times New Roman", Times, var(--font-serif4), serif; }
+.paper-pdf ins.rv-ins { background: #dcfce7; color: #166534; text-decoration: none; }
+.paper-pdf del.rv-del { background: #fde2e2; color: #b42318; text-decoration: line-through; }
+.paper-pdf { counter-reset: h1 figure table listing; color: #000; }
+.paper-pdf section > h1 { break-after: avoid; }
+:is(.paper-pdf, .p-first, .p-rest) > section:not([role]) { counter-increment: h1; counter-reset: h2; }
+:is(.paper-pdf, .p-first, .p-rest) > section:not([role]) > section:not([role]) { counter-increment: h2; counter-reset: h3; }
+:is(.paper-pdf, .p-first, .p-rest) > section:not([role]) > section:not([role]) > section:not([role]) { counter-increment: h3; }
+.paper-pdf p { margin: 0; orphans: 2; widows: 2; text-align: justify; }
+.paper-pdf ul, .paper-pdf ol { margin: 4pt 0; padding-left: 1.6em; }
+.paper-pdf ul { list-style: disc; } .paper-pdf ol { list-style: decimal; }
+.paper-pdf pre { font: 8pt/1.4 var(--font-jetbrains), monospace; text-align: left; white-space: pre-wrap; break-inside: avoid; }
+.paper-pdf code { font-family: var(--font-jetbrains), monospace; font-size: .9em; }
+.paper-pdf a { color: inherit; text-decoration: none; }
+.paper-pdf a[href^="#fn-"] { font-size: .75em; vertical-align: super; line-height: 0; }
+.paper-pdf span[role="math"] { font-style: italic; }
+.paper-pdf figure { margin: 1.5em 0; text-align: center; break-inside: avoid; counter-increment: figure; }
+.paper-pdf figure > p { text-align: center; }
+.paper-pdf figure img { max-width: 90%; max-height: 120mm; height: auto; display: block; margin-inline: auto; } /* block + auto margins: centered whatever the reset says */
+.paper-pdf figure:has(> p > img[style*="width"]) { width: 100%; } /* a resized image is a share of the text width, so its figure must span it */
+.paper-pdf figure img[style*="width"] { max-width: 100%; }
+.paper-pdf figcaption { margin-top: 5px; text-align: center; }
+.paper-pdf figcaption::before { content: "Figure " counter(figure) ". "; font-weight: 700; }
+.paper-pdf figure:has(> table) { counter-increment: table; }
+.paper-pdf figure:has(> table) figcaption::before { content: "Table " counter(table) ". "; }
+.paper-pdf figure:has(> pre) { counter-increment: listing; text-align: left; }
+.paper-pdf figure:has(> pre) figcaption::before { content: "Listing " counter(listing) ". "; }
+.paper-pdf figure table { border-collapse: collapse; margin: 0 auto; border-top: 1px solid #000; border-bottom: 1px solid #000; }
+.paper-pdf th, .paper-pdf td { padding: 2pt 6pt; text-align: left; }
+.paper-pdf th { border-bottom: .5px solid #000; }
+.paper-pdf .p-title { string-set: title content(text); }
+.paper-pdf .p-authors { string-set: authors content(text); }
+/* Affiliation numbers and lines are generated content, so the running header (the text of .p-authors) stays names only. */
+.paper-pdf .p-author[data-refs]::after, .paper-pdf .p-aff::before { content: attr(data-refs); vertical-align: super; font-size: .7em; }
+.paper-pdf .p-aff { display: block; font-size: .8em; font-weight: 400; text-transform: none; letter-spacing: 0; }
+.paper-pdf .p-aff:first-of-type { margin-top: 4pt; }
+.paper-pdf .p-aff::after { content: " " attr(data-text); }
+.paper-pdf .p-subtitle { text-align: center; font-size: 1.15em; margin: -4pt 0 12pt; }
+.paper-pdf .p-keywords { margin: 0 0 12pt; text-align: left; }
+.paper-pdf .p-keywords::before { content: "Keywords: "; font-weight: 700; }
+/* An empty trailing page, added by the preview so a short paper always shows page 2. (Paged.js reads stylesheets, not style attributes.) */
+.p-blank { break-before: page; }

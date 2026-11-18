@@ -1,0 +1,37 @@
+/* Cambridge Large1 (class cup-journal): 210x280mm. Page 1 has a sidebar (journal, URL, article type, keywords, correspondence, publisher) beside one
+   main column; the pages after it are two columns, full width. Headings are unnumbered bold sans; the abstract is a grey box. */
+@page { size: 210mm 280mm; margin: 17mm 16mm 20mm 15mm; @top-left { content: counter(page); font: 7.5pt var(--sans); } @top-right { content: string(short); font: 600 7.5pt var(--sans); } }
+@page cover { @top-left { content: none; } @top-right { content: none; } }
+.paper-pdf .p-authors { string-set: short attr(data-short); }
+/* "cover" is page 1: the front matter plus the first N sections (the paper's firstPageSections field, set in the adapter); the rest starts a new page in two columns.
+   The strip is a margin, not @page, so it cannot be clipped. */
+.paper-pdf .p-first { page: cover; margin-left: 55mm; }
+.paper-pdf .p-rest { page: body; break-before: page; column-count: 2; column-gap: 5mm; }
+.paper-pdf { font: 9.5pt/12pt "Crimson Text", Crimson, Georgia, var(--font-serif4), serif; }
+.paper-pdf .p-side { float: left; width: 50mm; margin-left: -55mm; font: 7.5pt/9.5pt var(--sans); }
+.paper-pdf .p-side > * { margin: 0 0 9pt; }
+.paper-pdf .p-side p { text-align: left; text-indent: 0; }
+.paper-pdf .p-side .j { font: italic 9pt/11pt var(--sans); } .paper-pdf .p-side .u { font: 700 9pt/11pt var(--sans); }
+.paper-pdf .p-side .t { font: 700 12pt/14pt var(--sans); margin-top: 30pt; }
+.paper-pdf .p-side b { font-weight: 700; }
+/* Text where the class prints the publisher's logo. */
+.paper-pdf .p-side .pub { margin-top: 160mm; font: 600 17pt/17pt "Crimson Text", Crimson, Georgia, serif; letter-spacing: .02em; text-transform: uppercase; }
+.paper-pdf .p-side .pub small { display: block; font-size: 10pt; letter-spacing: .06em; }
+.paper-pdf .p-subtitle, .paper-pdf .p-authors, .paper-pdf .p-keywords { text-indent: 0; }
+.paper-pdf .p-title { font: 400 16pt/20pt var(--sans); margin: 0 0 12pt; }
+.paper-pdf .p-authors { font: 9pt/12pt var(--sans); border-top: .5pt solid #000; padding: 2pt 0 0; margin: 0 0 6pt; }
+/* The second rule sits between the names and the affiliations: it is the top of the first affiliation line. */
+.paper-pdf .p-aff:not(.p-aff + .p-aff) { border-top: .5pt solid #000; margin-top: 2pt; padding-top: 3pt; }
+.paper-pdf .p-aff { font-size: 6.5pt; line-height: 8pt; }
+.paper-pdf .p-aff[data-note] { display: none; } /* correspondence and emails are in the sidebar */
+.paper-pdf .p-subtitle { display: none; }
+.paper-pdf .p-keywords { display: none; }
+.paper-pdf p { text-align: justify; hyphens: auto; } .paper-pdf p + p { text-indent: 12pt; }
+.paper-pdf section > h1 { font: 700 8.5pt/10pt var(--sans); margin: 14pt 0 3pt; }
+.paper-pdf section section > h1 { font-style: italic; font-weight: 600; margin: 10pt 0 2pt; }
+.paper-pdf .p-rest > section:first-child > h1 { margin-top: 0; }
+.paper-pdf section[role="doc-abstract"] { background: #d9d9d9; border-radius: 0; padding: 7pt 9pt 8pt; margin: 8pt 0 6pt; font-size: 8.5pt; line-height: 10pt; }
+.paper-pdf section[role="doc-abstract"] > h1 { font-size: 8pt; margin: 0 0 3pt; }
+.paper-pdf section[role="doc-bibliography"] > ul { list-style: none; padding: 0; }
+.paper-pdf section[role="doc-bibliography"] li { font-size: 8pt; line-height: 10pt; padding-left: 1.5em; text-indent: -1.5em; margin-bottom: 2pt; }
+.paper-pdf figcaption { font: 8pt/10pt var(--sans); text-align: center; } .paper-pdf figcaption::before { font-weight: 700; }

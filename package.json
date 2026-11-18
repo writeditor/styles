@@ -1,0 +1,13 @@
+{
+  "name": "@writeditor/styles",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": {
+    "build": "node scripts/build.ts",
+    "test": "node --test 'src/**/*.test.ts'",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": { "@types/node": "26.6.5", "typescript": "7.0.2" }
+}

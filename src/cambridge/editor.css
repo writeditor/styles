@@ -1,0 +1,9 @@
+/* Editor glue only: the look is style.css. Selectors name .paper-pdf, .p-* and .paper-side, nothing of the editor's internals. */
+.paper { padding-left: 55mm; } /* the strip page 1's sidebar sits in */
+.paper-side { position: absolute; left: 15mm; top: 17mm; }
+.paper-side .p-side { float: none; margin: 0; }
+/* The keywords field is part of the page's text but belongs in the sidebar: it hangs in the strip under the sidebar's text (--side-h is measured in the editor). */
+.paper-pdf .p-keywords { display: block; position: absolute; left: 15mm; top: calc(17mm + var(--side-h, 70mm) + 12pt); width: 50mm; margin: 0; font: 7.5pt/9.5pt var(--sans); text-align: left; text-indent: 0; }
+/* The dropdowns look like the text they replace until you point at them. */
+.paper-side select { font: inherit; color: inherit; background: transparent; border: 1px solid transparent; border-radius: 3px; padding: 0; max-width: 100%; cursor: pointer; text-overflow: ellipsis; }
+.paper-side select:hover, .paper-side select:focus { border-color: #999; }

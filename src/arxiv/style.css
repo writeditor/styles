@@ -1,0 +1,33 @@
+@page { size: letter; margin: 1in; @top-left { content: string(title); font: italic 8.5pt var(--serif); max-width: 4in; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } @top-right { content: string(subtitle); font: 8.5pt var(--serif); font-variant: small-caps; letter-spacing: .05em; } @bottom-center { content: counter(page); font: 11pt var(--serif); } }
+@page :first { @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; } }
+.paper-pdf { font: 10pt/1.1 "Times New Roman", "Nimbus Roman", Times, var(--font-serif4), serif; }
+.paper-pdf .p-title { font-size: 17pt; font-weight: 400; font-variant: small-caps; text-align: center; border-top: 2pt solid #000; border-bottom: 2pt solid #000; padding: 12pt 0 10pt; margin: 0 0 8pt; }
+/* The subtitle is the line under the title ("A Preprint" in the template), and the running head on the right. */
+.paper-pdf .p-subtitle { font: 400 10pt var(--serif); font-variant: small-caps; letter-spacing: .05em; text-align: center; opacity: 1; margin: 0 0 14pt; string-set: subtitle content(text); }
+.paper-pdf .p-authors { font-weight: 700; text-align: center; margin: 0 0 20pt; }
+.paper-pdf .p-aff { font-size: 1em; } /* arXiv sets affiliations at body size; the email line is monospace (\texttt) */
+.paper-pdf .p-aff[data-refs=""], .paper-pdf .p-aff.emails { font-family: "Courier New", Courier, monospace; font-size: .9em; }
+.paper-pdf .p-cols { display: flex; justify-content: center; gap: 2em; font-weight: 400; }
+.paper-pdf .p-col { width: 16em; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.paper-pdf .p-name { font-weight: 700; }
+.paper-pdf .p-mail { font-family: "Courier New", Courier, monospace; font-size: .8em; }
+.paper-pdf .p-date { font-weight: 400; margin-top: 20pt; }
+.paper-pdf .orcid { display: inline-flex; align-items: center; justify-content: center; width: 2em; height: 2em; margin-right: .5em; border-radius: 50%; background: #a6ce39; color: #fff; font: 700 .55em/1 Helvetica, Arial, sans-serif; letter-spacing: 0; vertical-align: .15em; }
+.paper-pdf .p-aff .orcid { display: none; }
+.paper-pdf .p-keywords::before { content: "Keywords "; font-style: italic; margin-right: .4em; }
+.paper-pdf p { margin: 0 0 5.5pt; text-align: justify; }
+.paper-pdf section > h1 { font-size: 12pt; font-weight: 700; margin: 16pt 0 11pt; }
+.paper-pdf section section > h1 { font-size: 10pt; margin: 9pt 0 4pt; }
+.paper-pdf > section:not([role]) > h1::before { content: counter(h1) "\2003"; } .paper-pdf > section:not([role]) > section:not([role]) > h1::before { content: counter(h1) "." counter(h2) "\2003"; } .paper-pdf > section:not([role]) > section:not([role]) > section:not([role]) > h1::before { content: counter(h1) "." counter(h2) "." counter(h3) "\2003"; }
+.paper-pdf section[role="doc-abstract"] { margin: 0 0.5in 18pt; }
+.paper-pdf section[role="doc-abstract"] > h1 { font-size: 12pt; text-align: center; font-variant: small-caps; margin: 0 0 6pt; }
+.paper-pdf section[role="doc-bibliography"] > ul { list-style: none; padding: 0; counter-reset: ref; }
+.paper-pdf section[role="doc-bibliography"] li { counter-increment: ref; padding-left: 2.2em; text-indent: -2.2em; margin-bottom: 3pt; }
+.paper-pdf section[role="doc-bibliography"] li::before { content: "[" counter(ref) "] "; }
+.paper-pdf figcaption::before { font-weight: 400; }
+.paper-pdf .p-foot { float: footnote; font: 400 8pt/1.2 var(--serif); text-align: left; }
+.paper-pdf .p-foot::footnote-call { content: "*"; vertical-align: super; font-size: .7em; line-height: 0; }
+/* the footnote is moved out of .paper-pdf into the page's footnote area, so these cannot be scoped to it */
+.p-foot[data-footnote-marker]::marker { content: "* "; }
+.pagedjs_footnote_content .p-foot { font: 400 8pt/1.2 "Times New Roman", "Nimbus Roman", Times, serif; text-align: left; }
+@page { @footnote { background: linear-gradient(#000, #000) top left / 2in .5pt no-repeat; padding-top: 4pt; margin-top: 6pt; } }

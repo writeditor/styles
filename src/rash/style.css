@@ -1,0 +1,41 @@
+@page { size: A4; margin: 20mm 22mm; @bottom-center { content: counter(page); font: 9pt Helvetica, Arial, sans-serif; } }
+/* The PDF is the page as the editor shows it (see editor.css): same type, left-aligned, grey abstract card, unnumbered headings. Light colors only. */
+.paper-pdf { --ink: #1d1b2c; --muted: #6b6880; --bg: #f6f5fa; --accent: #6d4fe3; --line: #e6e4ee; font: 16px/1.7 "Helvetica Neue", Helvetica, Arial, var(--font-inter), sans-serif; color: var(--ink); }
+.paper-pdf .p-title { font: 700 30px/1.25 "Helvetica Neue", Helvetica, Arial, var(--font-inter), sans-serif; letter-spacing: -.01em; text-align: left; margin: 0 0 6px; }
+.paper-pdf .p-subtitle { font: 400 20px/1.35 "Helvetica Neue", Helvetica, Arial, var(--font-inter), sans-serif; opacity: .8; text-align: left; margin: 0 0 10px; }
+.paper-pdf .p-authors { font: 15px/1.5 var(--font-inter), system-ui, sans-serif; color: var(--muted); text-align: left; margin: 0 0 12px; }
+.paper-pdf .p-author { color: var(--ink); }
+.paper-pdf .p-aff { font-size: 13px; line-height: 1.5; }
+.paper-pdf .p-aff:first-of-type { margin-top: 6px; }
+.paper-pdf .orcid { display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; margin-left: 3px; border-radius: 50%; background: #a6ce39; color: #fff; font: 700 7px/1 var(--font-inter), system-ui, sans-serif; vertical-align: 1px; }
+.paper-pdf .p-keywords { font: 14px/1.5 var(--font-inter), system-ui, sans-serif; color: var(--muted); margin: 0 0 32px; }
+.paper-pdf .p-keywords::before { color: var(--ink); font-weight: 600; }
+.paper-pdf p { margin: 0 0 12px; text-align: left; }
+.paper-pdf section > h1 { font: 700 22px/1.3 "Helvetica Neue", Helvetica, Arial, var(--font-inter), sans-serif; margin: 32px 0 8px; }
+.paper-pdf section section > h1 { font-size: 18px; } .paper-pdf section section section > h1 { font-size: 16px; }
+.paper-pdf > section:not([role]) > h1::before, .paper-pdf > section:not([role]) section > h1::before { content: none; }
+.paper-pdf section[role="doc-abstract"] { background: var(--bg); border-radius: 6px; padding: 12px 20px 8px; margin: 0 0 16px; }
+.paper-pdf section[role="doc-abstract"] > h1, .paper-pdf section[role="doc-acknowledgements"] > h1, .paper-pdf section[role="doc-bibliography"] > h1 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); text-align: left; margin: 0 0 4px; }
+.paper-pdf section[role="doc-bibliography"] { font-size: 15px; }
+.paper-pdf ul { list-style: disc; padding-left: 24px; margin: 0 0 12px; }
+.paper-pdf ol, .paper-pdf section[role="doc-bibliography"] > ul { list-style: decimal; padding-left: 24px; margin: 0 0 12px; }
+.paper-pdf section[role="doc-bibliography"] li { padding-left: 0; text-indent: 0; }
+.paper-pdf section[role="doc-bibliography"] li::before { content: none; }
+.paper-pdf blockquote { border-left: 3px solid var(--line); margin: 16px 0; padding-left: 16px; color: var(--muted); font-style: italic; }
+.paper-pdf pre { background: var(--bg); padding: 12px; border-radius: 6px; font: 13px/1.5 var(--font-jetbrains), ui-monospace, monospace; white-space: pre-wrap; }
+.paper-pdf code { font: .85em var(--font-jetbrains), ui-monospace, monospace; background: var(--bg); padding: 1px 4px; border-radius: 3px; }
+.paper-pdf pre code { background: none; padding: 0; }
+.paper-pdf a:not(.orcid) { color: var(--accent); text-decoration: underline; }
+.paper-pdf a[href^="#fn-"] { text-decoration: none; }
+.paper-pdf span[role="math"] { font: .9em var(--font-jetbrains), ui-monospace, monospace; font-style: normal; color: var(--accent); }
+.paper-pdf span[role="math"]::before, .paper-pdf span[role="math"]::after { content: "$"; opacity: .5; }
+.paper-pdf p[role="math"] { font: .9em var(--font-jetbrains), ui-monospace, monospace; color: var(--accent); text-align: center; margin: 16px 0; }
+.paper-pdf figure { margin: 24px auto; width: fit-content; max-width: 100%; }
+.paper-pdf figure img { max-width: 100%; border: 0; border-radius: 4px; display: block; margin-inline: auto; }
+.paper-pdf figure p { margin: 0; }
+.paper-pdf figcaption { font: 14px/1.5 var(--font-inter), system-ui, sans-serif; color: var(--muted); margin-top: 8px; }
+.paper-pdf figcaption::before { font-weight: 600; color: var(--ink); }
+.paper-pdf figure:has(> pre) { text-align: left; width: auto; }
+.paper-pdf figure table { border: 0; font: 14px/1.5 var(--font-inter), system-ui, sans-serif; }
+.paper-pdf figure th, .paper-pdf figure td { border: 1px solid var(--line); padding: 4px 10px; min-width: 64px; text-align: left; }
+.paper-pdf figure th { background: var(--bg); font-weight: 600; border-bottom: 1px solid var(--line); }
