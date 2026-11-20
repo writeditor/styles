@@ -1,3 +1,7 @@
 node_modules/
 dist
 *.tsbuildinfo
+# The arxiv venue's LaTeX class and official sample are third-party (see src/arxiv/SOURCE.txt)
+src/arxiv/class/*
+!src/arxiv/class/media/
+src/arxiv/sample/

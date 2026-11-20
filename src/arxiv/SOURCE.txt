@@ -1,0 +1,13 @@
+The LaTeX files of this venue are not in this repository (copyright). Get them from the sources below and put them here:
+
+  class/PRIMEarxiv.sty                class file
+  sample/templatePRIME.tex            the official sample (what every metric compares with)
+  sample/references.bib               its bibliography
+  sample/templateArxiv.tex, README.md the rest of the template (optional)
+
+Sources, as written in the template's own README:
+  PRIME AI template (Perception, Robotics and Intelligent Machines group, Universite de Moncton): https://primeai.ca/
+  Based on the arXiv style of George Kour: https://github.com/kourgeorge/arxiv-style  (MIT licence, Copyright (c) 2020 George Kour; adapted by Moulay Akhloufi)
+Obtained as the archive "Arxiv___PRIME_AI_Style_Template.zip". The page it was downloaded from is not recorded: add its URL here.
+
+class/media/figure1.png is ours (a stand-in for the sample's \fbox{\rule{4cm}{4cm}} figure) and is tracked.

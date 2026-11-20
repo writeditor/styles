@@ -1,6 +1,6 @@
 # @writeditor/styles
 
-Paper styles for RASH papers, one folder per venue, like class files. Pure CSS and data: nothing here imports Writ.
+Paper styles for RASH papers, one folder per venue, like class files. CSS, data and small DOM-only functions (front matter, PDF markup); nothing here imports Writ or a DOM library.
 
 ```
 src/
@@ -26,5 +26,6 @@ Cambridge Large1 also needs `aside.p-side` before the title, and the body split 
 
 ## Adding a style
 
-1. A folder `src/<id>/` with `style.css`, `editor.css` and `index.ts`; one line in `src/index.ts`; run `build`.
+0. Fastest: `make new-style ID=<id> NAME="<Name>"` in the compiler repo creates the folder, registers it and gitignores its third-party files (step 1 by hand, below).
+1. A folder `src/<id>/` with `style.css`, `editor.css` and `index.ts`; one line in `src/index.ts`; run `build`. To measure it against the venue's official LaTeX sample (compiler's `make eval ARGS=<id>`), add a `venue.json`: `{ "sample": "sample/x.tex", "dirs": ["class", "sample"], "media": "media" }`. The class and sample are third-party: gitignore them and say where to get them in `SOURCE.txt`.
 2. Optional, Writ only: an adapter in the Writ repo (`apps/web/components/adapters/index.ts`, extra markup) and, for LaTeX export, `xslt/<id>.xsl` plus a `VENUES` entry in [writeditor/compiler](https://github.com/writeditor/compiler).
