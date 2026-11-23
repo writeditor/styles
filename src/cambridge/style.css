@@ -35,3 +35,8 @@
 .paper-pdf section[role="doc-bibliography"] > ul { list-style: none; padding: 0; }
 .paper-pdf section[role="doc-bibliography"] li { font-size: 8pt; line-height: 10pt; padding-left: 1.5em; text-indent: -1.5em; margin-bottom: 2pt; }
 .paper-pdf figcaption { font: 8pt/10pt var(--sans); text-align: center; } .paper-pdf figcaption::before { font-weight: 700; }
+
+/* Statement sections are run-in: the heading is a bold lead-in on the first line of the text (the editor sets data-run on them). */
+.paper-pdf section[data-run] > h1 { display: inline; font: 700 9.5pt/12pt "Crimson Text", Crimson, Georgia, serif; margin: 0 .4em 0 0; }
+.paper-pdf section[data-run] > h1 + p { display: inline; }
+.paper-pdf section[data-run] > h1::after { content: "."; }

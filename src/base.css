@@ -15,6 +15,10 @@
 .paper-pdf a { color: inherit; text-decoration: none; }
 .paper-pdf a[href^="#fn-"] { font-size: .75em; vertical-align: super; line-height: 0; }
 .paper-pdf span[role="math"] { font-style: italic; }
+/* Left out of the heading counters (the editor sets data-un on them). */
+:is(.paper-pdf, .p-first, .p-rest) > section[data-un] { counter-increment: none; }
+/* Formatting strikethrough (<s>): a plain mark like bold, not an edit. */
+.paper-pdf s { text-decoration: line-through; }
 .paper-pdf figure { margin: 1.5em 0; text-align: center; break-inside: avoid; counter-increment: figure; }
 .paper-pdf figure > p { text-align: center; }
 .paper-pdf figure img { max-width: 90%; max-height: 120mm; height: auto; display: block; margin-inline: auto; } /* block + auto margins: centered whatever the reset says */

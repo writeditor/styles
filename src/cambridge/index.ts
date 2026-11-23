@@ -14,7 +14,7 @@ export const ARTICLE_TYPES = ["Research article", "Review article", "Perspective
 
 // Real CSS lives next to this file (style.css, editor.css); `pnpm build` inlines it into css.generated.ts.
 export const cambridge: Style = {
-  id: "cambridge", name: "Cambridge Large1", paper: "210×280 mm", page: { size: [210, 280], margins: [17, 16, 20, 15] },
+  id: "cambridge", name: "Cambridge Large1", paper: "210×280 mm", page: { size: [210, 280], margins: [17, 16, 20, 15], rest: { columns: 2, gap: 5 }, first: { strip: 55 } },
   // Article type, DOI and date come from the paper's standard fields.
   fields: [
     { id: "journal", label: "Journal", type: "enum", options: JOURNALS, default: "chr" },
