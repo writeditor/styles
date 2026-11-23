@@ -28,4 +28,4 @@ Cambridge Large1 also needs `aside.p-side` before the title, and the body split 
 
 0. Fastest: `make new-style ID=<id> NAME="<Name>"` in the compiler repo creates the folder, registers it and gitignores its third-party files (step 1 by hand, below).
 1. A folder `src/<id>/` with `style.css`, `editor.css` and `index.ts`; one line in `src/index.ts`; run `build`. To measure it against the venue's official LaTeX sample (compiler's `make eval ARGS=<id>`), add a `venue.json`: `{ "sample": "sample/x.tex", "dirs": ["class", "sample"], "media": "media" }`. The class and sample are third-party: gitignore them and say where to get them in `SOURCE.txt`.
-2. Optional, Writ only: an adapter in the Writ repo (`apps/web/components/adapters/index.ts`, extra markup) and, for LaTeX export, `xslt/<id>.xsl` plus a `VENUES` entry in [writeditor/compiler](https://github.com/writeditor/compiler).
+2. Optional, Writ only: an adapter in the Writ repo (`apps/web/components/adapters/index.ts`, extra markup) and, for LaTeX export, `src/<id>/export.xsl` in the style folder (the compiler finds it by folder name; it has no registry).
