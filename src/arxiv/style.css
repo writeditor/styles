@@ -304,17 +304,17 @@ figcaption::before {
 }
 
 /* links get a box, as hyperref draws them: red internal references, green citations, cyan addresses */
-a.p-ref {
+.p-ref {
   outline: .5pt solid #f00;
   outline-offset: 1pt;
 }
 
-a.p-cite {
+.p-cite {
   outline: .5pt solid #0f0;
   outline-offset: 1pt;
 }
 
-a.p-url {
+.p-url {
   outline: .5pt solid #0ff;
   outline-offset: 1pt;
 }
@@ -351,7 +351,7 @@ section[role="doc-bibliography"] li > p {
 /* \texttt in the class: Courier at 8.75pt has the 5.25pt advance of Computer Modern Typewriter at 10pt */
 code,
 pre,
-a.p-url {
+.p-url {
   font-family: "Courier New", Courier, "Liberation Mono", monospace;
   font-size: 8.75pt;
 }
