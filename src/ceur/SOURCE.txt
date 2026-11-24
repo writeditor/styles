@@ -1,0 +1,6 @@
+The LaTeX files of the CEUR-WS style are third-party and not in git. Get them and put them here:
+  class/    ceurart.cls (v0.6.2 2025-10-06), its logos (ceur-ws-logo.pdf, cc-by.pdf) and the copyright texts
+  sample/   sample-1col.tex, sample-ceur.bib and the figures it includes (UML_state_machine_Fig1.png, sample-franklin.png, wikidata_stmnt.pdf)
+Source: "Template for submissions to CEUR Workshop Proceedings (CEUR-WS.org)", https://ceur-ws.org/Vol-XXX/CEURART.zip (the template zip linked from https://ceur-ws.org/HOWTOSUBMIT.html)
+Licence: ceurart.cls by Dmitry S. Kulyabov, LaTeX Project Public License v1.3c or later (class/Copyright.lppl.txt); the sample is the template's own.
+  (wikidata_stmnt.png and cc-by.png are ours: the PDFs rasterised for the RASH conversion)

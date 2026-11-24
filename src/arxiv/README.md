@@ -20,13 +20,13 @@ Known differences (paged PDF), after a pass over the first list: the footnote ma
 <!-- metrics:start -->
 ## Compilation check
 
-Sample: `sample/templatePRIME.tex`, converted to RASH, compiled by each output and compared with the reference PDF. Last run 2026-11-23 (`make eval ARGS=arxiv`).
+Sample: `sample/templatePRIME.tex`, converted to RASH, compiled by each output and compared with the reference PDF. Last run 2026-11-24 (`make eval ARGS=arxiv`).
 
 | Output | Compiles | Pages | Undefined refs | Style score | Failed checks | Pixel diff by page |
 |---|---|---|---|---|---|---|
 | reference (official class) | true | 3 | 0 | 1.00 | none | 0.0000 / 0.0000 / 0.0000 |
-| LaTeX (our compiler) | true | 3 | 0 | 1.00 | none | 0.0037 / 0.0624 / 0.0608 |
-| PDF (paged) | true | 3 | 0 | 1.00 | none | 0.0805 / 0.0877 / 0.0553 |
+| LaTeX (our compiler) | true | 3 | 0 | 1.00 | none | 0.0037 / 0.0616 / 0.0608 |
+| PDF (paged) | true | 3 | 0 | 1.00 | none | 0.0805 / 0.0878 / 0.0553 |
 
 Style score: share of the checks (page size, fonts, margins, leading, header/footer, title) that match the reference. Pixel diff: share of pixels that differ on each page (0 = identical). Both are measured, never edited by hand.
 <!-- metrics:end -->

@@ -1,0 +1,289 @@
+/*
+ * CEUR-WS: the ceurart class (CEUR Workshop Proceedings), drawn in CSS.
+ *
+ * Class   ceurart.cls v0.6.2 by Dmitry S. Kulyabov (LPPL 1.3c), from the CEUR-WS template; see SOURCE.txt.
+ * CSS     Writ. Bare RASH selectors, like rash.css; index.ts binds them to the paper box (scope.ts), and :scope is that box.
+ *         Calibrated against the template's own PDF: `make eval ARGS=ceur` in the compiler repo.
+ *
+ * Measures (pt unless noted), from the class and its sample
+ *   Page         A4; text 451.3 wide (side margins 72)
+ *   Body         Libertinus Serif 10.95 (LaTeX's "11pt") on 13.5, justified
+ *   Title        Libertinus Sans Bold 17.28 (\LARGE) on 21.6, left
+ *   Headings     Libertinus Sans Bold: section 12 on 14, subsection 11 on 13, subsubsection 10.5 on 12 (italic); numbered "1." with a 0.5em space
+ *   Abstract     indented 45 from the left; heading and "Keywords" in Libertinus Sans Bold
+ */
+@page {
+  size: 595.276pt 841.89pt; /* A4: Chromium's own "A4" rounds to 594.96 x 841.92 */
+  margin: 62pt 72pt 72pt;
+}
+:scope {
+  font: 10.95pt/13.5pt "Libertinus Serif", "Linux Libertine O", serif;
+  hyphens: auto;
+}
+p,
+li {
+  word-spacing: -.08em; /* TeX shrinks interword glue; a browser only stretches */
+}
+p {
+  margin: 0;
+  text-align: justify;
+}
+/* TeX indents every paragraph except the first one under a heading (and the abstract block) */
+p {
+  text-indent: 11pt;
+}
+section > p:nth-child(2), /* the first paragraph under a heading; not `h1 + p`: Paged.js rewrites `+` selectors into weaker ones */
+section[role="doc-abstract"] p,
+.p-keywords p {
+  text-indent: 0;
+}
+sup,
+sub {
+  line-height: 0;
+}
+.p-title {
+  font: 700 16.9pt/21.6pt "Libertinus Sans", Helvetica, Arial, sans-serif;
+  margin: 0 0 10.4pt;
+}
+.p-foot::footnote-call {
+  font-family: "Libertinus Math", "Libertinus Serif", serif; /* the star is a math symbol */
+  content: "\22C6";
+  vertical-align: .5em;
+  font-size: 1em;
+  line-height: 0;
+}
+.p-authors {
+  text-align: left;
+  margin: 0 0 12pt;
+}
+.p-authors address {
+  font-style: normal;
+}
+.p-authors .author_name {
+  font-weight: 400;
+}
+.p-authors .given {
+  color: #808080;
+}
+.p-authors .affiliations {
+  display: block;
+  margin-top: 10pt;
+  font: italic 9pt/13pt "Libertinus Serif", serif;
+}
+.p-authors .affiliation {
+  display: block;
+}
+section > h1 {
+  font: 700 13.7pt/14pt "Libertinus Sans", Helvetica, Arial, sans-serif;
+  margin: 3.5pt 0 11.5pt; /* the top margin is what TeX keeps at a page start (the ruler says 3.5, not the 6.5 the row table showed: the sans font's boxes differ); Paged.js keeps it there too, so the rest of the gap hangs below the previous block (it is cut at a page break) */
+}
+section:has(+ section) {
+  margin-bottom: 19pt; /* collapses with the next heading's own 3.5pt, so this is the whole gap */
+}
+section section > h1 {
+  font-size: 11pt;
+  line-height: 13pt;
+  margin: 4pt 0 8.5pt;
+}
+section section:has(+ section) {
+  margin-bottom: 12pt;
+}
+section > p:has(+ section) {
+  margin-bottom: 12pt;
+}
+section > ul:has(+ section) {
+  margin-bottom: 12pt;
+}
+section > ol:has(+ section) {
+  margin-bottom: 12pt;
+}
+section > pre:has(+ section) {
+  margin-bottom: 12pt;
+}
+section > section:nth-child(2) > h1 {
+  margin-top: 8pt; /* a subsection right under its section's heading */
+}
+section section section > h1 {
+  font-size: 10.5pt;
+  line-height: 12pt;
+  font-style: italic;
+}
+:scope > section:not([role]) > h1::before {
+  content: counter(h1) ".\2003";
+}
+:scope > section:not([role]) > section:not([role]) > h1::before {
+  content: counter(h1) "." counter(h2) ".\2003";
+}
+:scope > section:not([role]) > section:not([role]) > section:not([role]) > h1::before {
+  content: counter(h1) "." counter(h2) "." counter(h3) ".\2003";
+}
+ul,
+ol {
+  margin: 12pt 0;
+  padding-left: 27pt;
+}
+ul.tight,
+ol.tight {
+  margin-top: 7.5pt; /* LaTeX adds \partopsep (4.5pt) only when a blank line precedes the list */
+}
+li:not(:first-child) {
+  margin-top: 1.5pt;
+}
+li > p {
+  text-indent: 0;
+}
+li > pre {
+  margin-left: 0;
+}
+pre {
+  margin: 11pt 0 6pt;
+  letter-spacing: .85pt; /* the class sets listings wider than the font's own advance */
+}
+section[role="doc-abstract"],
+.p-keywords {
+  margin-left: 45pt;
+}
+section[role="doc-abstract"] > h1,
+.p-keywords > h1 {
+  font: 700 11pt/12pt "Libertinus Sans", Helvetica, Arial, sans-serif;
+  margin: 17.5pt 0 -.5pt;
+}
+.p-keywords > h1 {
+  margin-top: 7pt;
+}
+.p-keywords {
+  padding-bottom: 23.5pt;
+}
+section[role="doc-abstract"] p,
+.p-keywords p {
+  font-size: 9pt;
+  line-height: 11pt;
+}
+pre {
+  line-height: 13.5pt;
+}
+ol > li::marker {
+  content: counter(list-item) ".\2002\2009"; /* the number ends 9.5pt before the text, as ceurart's label box does */
+}
+pre.lst {
+  margin-top: 5.5pt; /* lstlisting sits closer to the text above than verbatim does */
+}
+code,
+pre,
+.p-url {
+  font-family: "Libertinus Mono", "Courier New", monospace;
+  font-size: 9pt;
+}
+.p-foot {
+  float: footnote;
+  font: 400 9pt/11pt "Libertinus Serif", serif;
+}
+.p-note {
+  float: footnote;
+  font: 400 9pt/11pt "Libertinus Serif", serif;
+}
+.p-keywords::before {
+  content: none; /* the shared label is "Keywords: "; here "Keywords" is a heading */
+}
+/* the footnote is moved out of the paper box into the page's footnote area, so these are not scoped to it; its mark is a raised numeral, not the list marker */
+.pagedjs_footnote_content .p-foot[data-footnote-marker],
+.pagedjs_footnote_content .p-note[data-footnote-marker] {
+  list-style: none;
+}
+.pagedjs_footnote_content .p-foot[data-footnote-marker]::before {
+  content: "*";
+  vertical-align: super;
+  font-size: .7em;
+  line-height: 0;
+}
+.pagedjs_footnote_content .p-note[data-footnote-marker]::before {
+  content: attr(data-n);
+  vertical-align: super;
+  font-size: .7em;
+  line-height: 0;
+}
+.pagedjs_footnote_content .p-foot,
+.pagedjs_footnote_content .p-note {
+  font: 400 9pt/11pt "Libertinus Serif", serif;
+  text-align: left;
+  text-indent: 0;
+}
+.p-note.p-first {
+  counter-reset: footnote 1; /* the page-foot block's notes are Paged.js footnotes too, but the numbering starts at the first real note */
+}
+.p-note::footnote-call {
+  vertical-align: super;
+  font-size: .7em;
+  line-height: 0;
+}
+@page {
+  @footnote {
+    background: linear-gradient(#000, #000) top left / 40% .4pt no-repeat;
+    padding-top: 3pt;
+  }
+}
+/* the first page's foot block: footnotes with no call mark */
+/* one rule per selector: Paged.js rewrites only the first selector of a list that has ::footnote-call */
+.p-foot.p-conf::footnote-call {
+  content: none;
+}
+.p-foot.p-contact::footnote-call {
+  content: none;
+}
+.p-foot.p-copy::footnote-call {
+  content: none;
+}
+.pagedjs_footnote_content .p-foot.p-conf[data-footnote-marker]::before,
+.pagedjs_footnote_content .p-foot.p-contact[data-footnote-marker]::before,
+.pagedjs_footnote_content .p-foot.p-copy[data-footnote-marker]::before {
+  content: none;
+}
+.pagedjs_footnote_content .p-conf {
+  font-style: italic;
+}
+.pagedjs_footnote_content .p-copy {
+  font-size: 6pt;
+  line-height: 9pt;
+}
+.pagedjs_footnote_content img.cc {
+  height: 11pt;
+  vertical-align: middle;
+  margin-right: 3pt;
+}
+.pagedjs_footnote_content i.fa {
+  font: normal 900 9pt "Font Awesome 5 Free";
+}
+.pagedjs_footnote_content i.fa-r {
+  font-weight: 400;
+}
+.pagedjs_footnote_content .orcid {
+  display: inline-block;
+  width: 9pt;
+  height: 9pt;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  font: 700 5.5pt/9pt "Libertinus Sans", sans-serif;
+  text-align: center;
+}
+.pagedjs_footnote_content a {
+  color: #2f4f4f;
+  text-decoration: none;
+}
+.p-foot.p-mark::footnote-call {
+  content: none;
+}
+.pagedjs_footnote_content .p-foot.p-mark[data-footnote-marker]::before {
+  content: attr(data-mark);
+}
+/* the TeX logos, which are narrower than the letters set plainly */
+.latex sup {
+  font-size: .7em;
+  vertical-align: .2em;
+  margin: 0 -.3em 0 -.32em;
+}
+.latex sub {
+  font-size: 1em;
+  vertical-align: -.2em;
+  margin: 0 -.12em 0 -.1em;
+}

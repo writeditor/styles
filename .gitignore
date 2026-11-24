@@ -5,3 +5,6 @@ dist
 src/arxiv/class/*
 !src/arxiv/class/media/
 src/arxiv/sample/
+# CEUR-WS: third-party class and sample (see src/ceur/SOURCE.txt)
+src/ceur/class/*
+src/ceur/sample/
