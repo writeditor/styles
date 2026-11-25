@@ -394,9 +394,8 @@ section[role="doc-bibliography"] > ul > li {
 section[role="doc-bibliography"] > ul > li::before {
   content: "[" counter(bib) "]";
   position: absolute;
-  left: -22.7pt;
-  width: 17pt;
-  text-align: right;
+  right: calc(100% + 5.7pt); /* right edge 5.7pt before the text, so "[10]" grows leftward instead of wrapping */
+  white-space: nowrap;
 }
 /* TeX's \topskip: text that starts a page has its first baseline a little lower than a block that continues the flow (the first block of a continued section or list). */
 [data-split-from] > p:first-child:not([data-split-from]),

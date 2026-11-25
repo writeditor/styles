@@ -228,7 +228,10 @@ section[role="doc-bibliography"] li {
 section[role="doc-bibliography"] li::before {
   content: "[" counter(ref) "]";
   display: inline-block;
-  width: 16.5pt;
+  min-width: 16.5pt; /* a wider label ("[10]") pushes its first line on, as in LaTeX, instead of wrapping */
+  padding-right: 4pt; /* \labelsep; inside min-width, so "[9]" sits where it did */
+  box-sizing: border-box;
+  white-space: nowrap;
   text-indent: 0;
 }
 
