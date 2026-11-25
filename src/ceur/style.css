@@ -81,34 +81,28 @@ section:has(+ section) {
   margin-bottom: 19pt; /* collapses with the next heading's own 3.5pt, so this is the whole gap */
 }
 section section > h1 {
-  font-size: 11pt;
+  font-size: 11.95pt; /* \large; width ratio 0.92 at 11pt */
   line-height: 13pt;
   margin: 4pt 0 8.5pt;
 }
 section section:has(+ section) {
   margin-bottom: 12pt;
 }
-section > p:has(+ section) {
-  margin-bottom: 12pt;
-}
-section > ul:has(+ section) {
-  margin-bottom: 12pt;
-}
-section > ol:has(+ section) {
-  margin-bottom: 12pt;
-}
-section > pre:has(+ section) {
-  margin-bottom: 12pt;
+.p-gap {
+  margin-bottom: 14.5pt; /* a subsection after the section's own text (`p:has(+ section)` does not work: Paged.js rewrites `+`) */
 }
 section > section:nth-child(2) > h1 {
   margin-top: 8pt; /* a subsection right under its section's heading */
 }
 section section section > h1 {
-  font-size: 10.5pt;
+  font-size: 10.95pt;
   line-height: 12pt;
-  font-style: italic;
+  margin-bottom: 6.5pt;
 }
-:scope > section:not([role]) > h1::before {
+section section section:has(+ section) {
+  margin-bottom: 15.5pt;
+}
+:scope > section:not([role]):not([data-un]) > h1::before {
   content: counter(h1) ".\2003";
 }
 :scope > section:not([role]) > section:not([role]) > h1::before {
@@ -119,15 +113,15 @@ section section section > h1 {
 }
 ul,
 ol {
-  margin: 12pt 0;
+  margin: 8.5pt 0 6.75pt; /* class glue is \@sep .5\baselineskip + \partopsep, stretching or shrinking per page; 8.5 is what lets page 3 hold its last paragraph */
   padding-left: 27pt;
 }
 ul.tight,
 ol.tight {
-  margin-top: 7.5pt; /* LaTeX adds \partopsep (4.5pt) only when a blank line precedes the list */
+  margin-top: 6.75pt; /* LaTeX adds \partopsep (4.5pt) only when a blank line precedes the list */
 }
 li:not(:first-child) {
-  margin-top: 1.5pt;
+  margin-top: 1.35pt;
 }
 li > p {
   text-indent: 0;
@@ -169,8 +163,7 @@ pre.lst {
   margin-top: 5.5pt; /* lstlisting sits closer to the text above than verbatim does */
 }
 code,
-pre,
-.p-url {
+pre {
   font-family: "Libertinus Mono", "Courier New", monospace;
   font-size: 9pt;
 }
@@ -286,4 +279,141 @@ pre,
   font-size: 1em;
   vertical-align: -.2em;
   margin: 0 -.12em 0 -.1em;
+}
+/* Tables and figures. ceurart sets captions and tabulars in Libertinus Sans \small (9.95/12): a table's caption is above it, "Table N" bold on its own line (ceurart.cls __make_tbl_caption), a figure's caption is below, "Figure N:" bold run-in. */
+figure:has(> table) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 7pt 0 18.2pt; /* \floatsep between floats at the top of a page, \textfloatsep (data-float-last) before the text */
+}
+figure {
+  margin-top: 7pt;
+}
+figure[data-float-last] {
+  margin-bottom: 25.8pt;
+}
+figure:not(:has(> table))[data-float-last] {
+  margin-bottom: 14.8pt;
+}
+figure:has(> table) figcaption {
+  order: -1;
+  align-self: stretch;
+  margin: 0 0 5.5pt;
+  text-align: left;
+}
+figure:has(> table) figcaption::before {
+  content: "Table " counter(table);
+  display: block;
+  font-weight: 700;
+}
+figcaption {
+  font: 400 9.95pt/12pt "Libertinus Sans", Helvetica, Arial, sans-serif;
+  margin-top: 6pt;
+}
+figcaption::before {
+  content: "Figure " counter(figure) ": ";
+}
+figcaption[data-label]::before {
+  content: attr(data-label) ": ";
+}
+figure:has(> table) figcaption[data-label]::before {
+  content: attr(data-label);
+}
+figure table {
+  font: 400 9.95pt/11.7pt "Libertinus Sans", Helvetica, Arial, sans-serif;
+  border-top: .8pt solid #000;
+  border-bottom: .8pt solid #000;
+}
+th,
+td {
+  padding: 0 6pt;
+}
+th {
+  font-weight: 400;
+  padding-bottom: 4.9pt;
+}
+tr:last-child > td {
+  padding-bottom: 3.5pt; /* booktabs: the bottom rule sits a little below the last row */
+}
+td code,
+td [role="math"] {
+  font-size: 9pt;
+  line-height: 0; /* an inline box must not stretch the row */
+}
+/* a display formula with an id is numbered, the number at the right margin (as in LaTeX's equation) */
+.display_formula {
+  position: relative;
+  text-align: center;
+  margin: 7.7pt 0 3pt;
+}
+.display_formula .katex-display {
+  margin: 0; /* KaTeX's own 1em above and below would collapse with ours */
+}
+.katex {
+  font-size: 1em; /* KaTeX's 1.21 is larger than TeX's math at the text size */
+}
+td .katex {
+  line-height: 1.1; /* KaTeX's 1.2 would grow a row */
+}
+p.p-cont {
+  text-indent: 0;
+  padding-top: 11.5pt;
+}
+.display_formula[id] {
+  counter-increment: eq;
+}
+.display_formula[id]::after {
+  content: "(" counter(eq) ")";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* Links are dark slate, as the class colours them; a DOI is set in the mono face, an address in the text face. */
+a.p-cite,
+a.p-ref,
+a.p-url {
+  color: #2f4f4f;
+  text-decoration: none;
+}
+a[href^="https://doi.org/"] {
+  font: 9pt "Libertinus Mono", "Courier New", monospace;
+}
+/* The references: "[n]" labels hang left of the text (ceurart's thebibliography: text 22.7pt in, number right-aligned before it). */
+section[role="doc-bibliography"] > ul {
+  list-style: none;
+  padding-left: 22.7pt;
+  counter-reset: bib;
+}
+section[role="doc-bibliography"] > ul > li {
+  position: relative;
+  margin-top: .1pt; /* \bibsep: a little more per entry than the plain list pitch (measured over 21 entries) */
+  counter-increment: bib;
+}
+section[role="doc-bibliography"] > ul > li::before {
+  content: "[" counter(bib) "]";
+  position: absolute;
+  left: -22.7pt;
+  width: 17pt;
+  text-align: right;
+}
+/* TeX's \topskip: text that starts a page has its first baseline a little lower than a block that continues the flow (the first block of a continued section or list). */
+[data-split-from] > p:first-child:not([data-split-from]),
+[data-split-from] > li:first-child:not([data-split-from]) {
+  padding-top: 5pt !important;
+}
+section[role="doc-bibliography"] > h1 {
+  margin-bottom: 12pt;
+}
+/* tables and figures float to the top of the page where they are called, as LaTeX's [t] does (the PDF export moves them; see compiler/pdf) */
+figure {
+  --page-float: top;
+}
+/* Appendices (RASH role doc-appendix, after \appendix): lettered, "A." instead of a number. */
+:scope > section[role="doc-appendix"] {
+  counter-increment: appendix;
+}
+:scope > section[role="doc-appendix"] > h1::before {
+  content: counter(appendix, upper-alpha) ".\2003";
 }

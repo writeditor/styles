@@ -38,3 +38,6 @@ export function natbib(doc: Document): string {
   doc.querySelectorAll("a.p-cite").forEach((a) => { const m = /^\[(.*)\]$/.exec(a.textContent ?? ""); if (m) { a.textContent = m[1]; a.before("["); a.after("]"); } });
   return doc.body.innerHTML.replace(/<\/a>\], \[(?=<a [^>]*p-cite)/g, "</a>, ");
 }
+
+/** Section ids that carry no number, whatever the style (Cambridge's plain-language summary, CEUR-WS's declaration on generative AI). The editor marks them `data-un`, a PDF markup does the same. */
+export const UNNUMBERED = ["plain-language-summary", "declaration-on-generative-ai"] as const;

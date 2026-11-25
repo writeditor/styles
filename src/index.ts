@@ -14,7 +14,7 @@ export { groupByAffiliation, bylineHtml };
 export { JOURNALS, ARTICLE_TYPES } from "./cambridge/index.ts";
 export const BASE = CSS.base;
 /** Section ids that carry no number, whatever the style (the editor marks them `data-un`; base.css keeps them out of the heading counters). */
-export const UNNUMBERED = ["plain-language-summary"] as const;
+export { UNNUMBERED } from "./markup-steps.ts";
 /** Statement sections set as run-in paragraphs ("Funding. Text…"), as the Cambridge class does (the editor marks them `data-run`). Same list the compiler sends to \\Backmatter. */
 export const RUN_IN = ["supplementary-material", "acknowledgments", "acknowledgements", "ethical-standard", "author-contribution", "funding", "competing-interests", "data-availability"] as const;
 /** Every style, by id. A new venue is one folder plus one line here. */

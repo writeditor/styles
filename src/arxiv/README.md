@@ -20,7 +20,7 @@ Known differences (paged PDF), after a pass over the first list: the footnote ma
 <!-- metrics:start -->
 ## Compilation check
 
-Sample: `sample/templatePRIME.tex`, converted to RASH, compiled by each output and compared with the reference PDF. Last run 2026-11-24 (`make eval ARGS=arxiv`).
+Sample: `sample/templatePRIME.tex`, converted to RASH, compiled by each output and compared with the reference PDF. Last run 2026-11-25 (`make eval ARGS=arxiv`).
 
 | Output | Compiles | Pages | Undefined refs | Style score | Failed checks | Pixel diff by page |
 |---|---|---|---|---|---|---|
