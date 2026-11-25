@@ -1,1 +1,3 @@
-{ "sample": "sample/sample-1col.tex", "dirs": ["class", "sample"], "media": "sample" }
+{ "sample": "sample/sample-1col.tex", "dirs": ["class", "sample"], "media": "sample",
+  "fonts": ["Libertinus Serif"],
+  "tex": { "authors": "bracket", "frontAfterBegin": true, "fields": { "year": "copyrightyear", "clause": "copyrightclause", "conference": "conference" } } }
