@@ -2,7 +2,7 @@
 .paper-pdf { --sans: "Source Sans Pro", "Source Sans 3", Helvetica, Arial, sans-serif; --serif-cr: "Crimson Text", Crimson, Georgia, serif; --serif: "Latin Modern Roman", "CMU Serif", "Times New Roman", Times, var(--font-serif4), serif; }
 .paper-pdf ins.rv-ins { background: #dcfce7; color: #166534; text-decoration: none; }
 .paper-pdf del.rv-del { background: #fde2e2; color: #b42318; text-decoration: line-through; }
-.paper-pdf { counter-reset: h1 figure table listing eq; color: #000; }
+.paper-pdf { counter-reset: h1 figure table listing eq appendix; color: #000; }
 .paper-pdf section > h1 { break-after: avoid; }
 :is(.paper-pdf, .p-first, .p-rest) > section:not([role]) { counter-increment: h1; counter-reset: h2; }
 :is(.paper-pdf, .p-first, .p-rest) > section:not([role]) > section:not([role]) { counter-increment: h2; counter-reset: h3; }
@@ -23,7 +23,7 @@
 .paper-pdf figure > p { text-align: center; }
 .paper-pdf figure img { max-width: 90%; max-height: 120mm; height: auto; display: block; margin-inline: auto; } /* block + auto margins: centered whatever the reset says */
 .paper-pdf figure:has(> p > img[style*="width"]) { width: 100%; } /* a resized image is a share of the text width, so its figure must span it */
-.paper-pdf figure img[style*="width"] { max-width: 100%; }
+.paper-pdf figure img[style*="width"] { max-width: 100%; max-height: none; } /* the author chose the size: no height cap */
 .paper-pdf figcaption { margin-top: 5px; text-align: center; }
 .paper-pdf figcaption::before { content: "Figure " counter(figure) ". "; font-weight: 700; }
 .paper-pdf figure:has(> table) { counter-increment: table; }

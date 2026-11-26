@@ -3,8 +3,10 @@ import { rash } from "./rash/index.ts";
 import { arxiv } from "./arxiv/index.ts";
 import { cambridge } from "./cambridge/index.ts";
 import { ceur } from "./ceur/index.ts";
+import { oup } from "./oup/index.ts";
 import { arxivMarkup, groupByAffiliation, type MarkupOptions } from "./arxiv/markup.ts";
 import { ceurMarkup } from "./ceur/markup.ts";
+import { oupMarkup } from "./oup/markup.ts";
 import { bylineHtml, type BylinePerson, type Group } from "./byline.ts";
 
 export type { Style, Field } from "./types.ts";
@@ -18,11 +20,11 @@ export { UNNUMBERED } from "./markup-steps.ts";
 /** Statement sections set as run-in paragraphs ("Funding. Text…"), as the Cambridge class does (the editor marks them `data-run`). Same list the compiler sends to \\Backmatter. */
 export const RUN_IN = ["supplementary-material", "acknowledgments", "acknowledgements", "ethical-standard", "author-contribution", "funding", "competing-interests", "data-availability"] as const;
 /** Every style, by id. A new venue is one folder plus one line here. */
-export const STYLES = { rash, arxiv, cambridge, ceur } as const;
+export const STYLES = { rash, arxiv, cambridge, ceur, oup } as const;
 /** The PDF markup a style needs beyond title and sections, as a pure DOM function (styles without one print from the plain paper). */
-export const MARKUP: Partial<Record<keyof typeof STYLES, (doc: Document, o?: MarkupOptions) => string>> = { arxiv: arxivMarkup, ceur: ceurMarkup };
+export const MARKUP: Partial<Record<keyof typeof STYLES, (doc: Document, o?: MarkupOptions) => string>> = { arxiv: arxivMarkup, ceur: ceurMarkup, oup: oupMarkup };
 /** The styles that set their own byline (RASH markup, see byline.ts) and how they merge authors; Writ's editor draws these from the style instead of its chips. */
-export const BYLINE: Partial<Record<keyof typeof STYLES, { group?: Group; numbered?: boolean }>> = { arxiv: { group: groupByAffiliation }, ceur: { numbered: true } };
+export const BYLINE: Partial<Record<keyof typeof STYLES, { group?: Group; numbered?: boolean }>> = { arxiv: { group: groupByAffiliation }, ceur: { numbered: true }, oup: { numbered: true } };
 /** The byline HTML of a style, for the PDF and for Writ's editor. */
 export const byline = (style: keyof typeof STYLES, people: BylinePerson[], date?: string) => bylineHtml(people, BYLINE[style]?.group, date, BYLINE[style]?.numbered);
 

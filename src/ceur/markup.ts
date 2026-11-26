@@ -37,7 +37,7 @@ export function ceurMarkup(doc: Document, { math }: MarkupOptions = {}): string 
   const mark = (cls: string, sym: string, text: string) => text ? `<span class="p-foot p-mark" data-mark="${sym}">${esc(text)}</span>` : "";
   const marked = mark("cor", "*", meta("cortext")) + mark("fn", "\u2020", meta("fntext"));
   const conf = meta("conference") ? foot("conf", esc(meta("conference"))) : "";
-  const blocks = [mails && foot("contact", `<i class="fa fa-r">\uf2b6</i> ${mails}`), urls && foot("contact", `<i class="fa">\uf0ac</i> ${urls}`), orcids && foot("contact", `<span class="orcid">iD</span> ${orcids}`),
+  const blocks = [mails && foot("contact", `<i class="fa fa-r">\uf2b6</i> ${mails}`), urls && foot("contact", `<i class="fa">\uf0ac</i> ${urls}`), orcids && foot("contact", `<i class="fa fa-b">\uf8d2</i> ${orcids}`),
     meta("clause") && foot("copy", `<img class="cc" src="cc-by.png" alt="CC BY"/> \u00a9 ${esc(meta("year"))} ${esc(meta("clause"))}`)].filter(Boolean).join("");
   return `<div class="paper-pdf">${conf}<h1 class="p-title">${esc(f.title || "Untitled")}${note}</h1>${marked}${f.authors.length ? `<div class="p-authors">${bylineHtml(people, undefined, "", true)}</div>` : ""}${blocks}${body}</div>`;
 }

@@ -1,0 +1,5 @@
+The LaTeX files of the Oxford University Press style are third-party and not in git. Get them and put them here:
+  class/    oup-authoring-template.cls, oup-abbrvnat.bst, oup-plain.bst, manifest.txt, README
+  sample/   oup-authoring-template.tex (contemporary, large layout) and reference.bib
+Source: OUP "oup-authoring-template" bundle (Copyright 2026 Oxford University Press); also kept in compiler/eval/classes/oup/ with its doc/ folder.
+Licence: LaTeX Project Public License v1.3 or later.

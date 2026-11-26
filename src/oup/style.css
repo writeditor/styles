@@ -1,0 +1,149 @@
+/*
+ * Oxford University Press: oup-authoring-template, contemporary / large, drawn in CSS from the class's own sample.
+ *
+ * Class   oup-authoring-template.cls (OUP 2026, LPPL 1.3); see SOURCE.txt.
+ * CSS     Bare RASH selectors, like rash.css: `section > h1`, `.p-title`, `figure`. index.ts binds them to the paper box (scope.ts) and :scope is that box,
+ *         so write `:scope > section` for a top-level section, never .paper-pdf and never an editor selector.
+ *
+ * Measures (pt unless noted), from the class and the sample's PDF
+ *   Page         595.276 x 782.362 (210 x 276 mm); text 185 mm wide at 12.5 mm, two columns of 253.7 with 17 between
+ *   Head         running head at 30 on pages 2+ ("n | Journal"), 9.5 sans; page 1 has the journal block instead
+ *   Body         Latin Modern Roman 9bp (9.03) on 11.5, justified; headings Latin Modern Sans Bold
+ *   Page 1       journal block, title, byline, affiliations and the abstracts run the full width, then the two columns begin
+ */
+@page {
+  size: 595.276pt 782.362pt;
+  margin: 52.6pt 35.43pt 62.8pt;
+  /* footnotes sit under the right column, as the class sets them (it uses stfloats and footmisc [bottom]) */
+  @footnote { margin-left: 270.7pt; border-top: .5pt solid #000; padding-top: 2pt; }
+  @top-left { content: counter(page) " | " string(rh); font: 9.5pt/12pt "Latin Modern Sans", sans-serif; vertical-align: top; padding-top: 26pt; }
+}
+/* shortcut: the class puts the head on the right of odd pages ("Journal, ... | n"); Paged.js ignored the margin boxes of :right and :nth(odd) pages in this build, so every page has it on the left */
+@page :first {
+  margin-top: 34.5pt;
+  @top-left { content: none; }
+  @bottom-left { content: string(dates); white-space: pre-line; width: 100%; font: 6.92pt/9.5pt "Latin Modern Sans", sans-serif; vertical-align: top; padding-top: 3pt; background: linear-gradient(#000, #000) top / 100% .5pt no-repeat; margin-top: 12.75pt; text-align: left; }
+}
+.p-footdata { height: 0; overflow: hidden; }
+.p-dates { string-set: dates content(text); }
+:scope {
+  font: 8.507pt/1.3518 "Latin Modern Roman", "CMU Serif", serif; /* measured: the reference body is 1.062 narrower than 9.03 pt, 8.507 pt matches every word; 11.5 pt pitch as a ratio so it is not snapped */
+  hyphens: auto;
+}
+p, li { word-spacing: -.07em; }
+p { margin: 0; text-align: justify; text-indent: 1em; }
+
+/* page 1: the full-width front matter */
+.p-journal { float: left; font: 8pt/9pt "Latin Modern Sans", sans-serif; border-left: 3pt solid #5a5a5a; padding-left: 9pt; margin-bottom: 14pt; }
+.p-journal p { text-indent: 0; text-align: left; font-size: 7.5pt; line-height: 9pt; }
+.p-journal p.p-j1 { font-size: 8.6pt; }
+.p-journal p:nth-child(2) { margin-top: 3.5pt; }
+.p-journal p:nth-child(4) { margin-top: 3pt; }
+.p-rh { string-set: rh content(text); }
+.p-logo { float: right; width: 54.5pt; height: 20pt; margin-top: 5.5pt; background: #d9d9d9; }
+.p-title { clear: both; font: 700 20.1pt/22pt "Latin Modern Sans", sans-serif; text-align: center; margin: 0 0 12.5pt; padding-top: 4.5pt; }
+.p-authors address.authors { font: 11.8pt/12pt "Latin Modern Sans", sans-serif; text-align: center; }
+.p-authors address.affiliations { display: block; font: 7.4pt/11pt "Latin Modern Sans", sans-serif; text-align: center; margin-top: 20.5pt; }
+.p-authors .affiliation { display: block; }
+.p-authors strong { font-weight: 400; }
+.p-corresp { font: 7.4pt/9pt "Latin Modern Sans", sans-serif; text-align: center; text-indent: 0; margin-top: 7.5pt; }
+sup, sub { line-height: 0; }
+.p-front { border-top: 1.75pt dotted #444; border-bottom: 1.75pt dotted #444; margin: 15.25pt 0 0; padding: 3.75pt 0 8.25pt; margin-bottom: 0; font-family: "Latin Modern Sans", sans-serif; }
+.p-front section > h1, .p-other > h1 { font: 700 12pt/13pt "Latin Modern Sans", sans-serif; text-align: center; margin: 0 0 5pt; }
+.p-front section > p, .p-other > p { font: 700 8.06pt/11.5pt "Latin Modern Sans", sans-serif; text-indent: 0; }
+.p-keywords::before { content: none; }
+.p-keywords { font: 8.5pt/10pt "Latin Modern Sans", sans-serif; text-indent: 0; margin-top: 4pt; margin-bottom: 0; text-align: left; }
+.p-other { margin-top: 14pt; }
+.p-front .p-other > h1 { margin-bottom: 3.5pt; }
+.ph { background: #d9d9d9; height: 62pt; width: 520.25pt; }
+.p-other .ph { margin-top: 6.5pt; }
+.p-boxed { border: 0; background: linear-gradient(#000, #000) top / 100% 1pt no-repeat, linear-gradient(#000, #000) bottom / 100% 1pt no-repeat, linear-gradient(#000, #000) left / 1pt 100% no-repeat, linear-gradient(#000, #000) right / 1pt 100% no-repeat; background-origin: border-box; padding: 2.25pt 9pt 8pt; margin-top: 14pt; font: 8.5pt/11.5pt "Latin Modern Sans", sans-serif; }
+.p-boxed .box-title { font-weight: 700; font-size: 8pt; text-indent: 0; }
+.p-boxed ul { margin: 4pt 0 0; padding-left: 11pt; }
+.p-boxed li { line-height: 11.5pt; margin: 0; padding: 0; }
+
+/* the two columns */
+/* flow-root + padding: both columns start 25 pt under the rule, as the class does; the first heading's own margin is cancelled below */
+/* Paged.js drops a footnote whose call is more than 0 px beyond the content box (calls in an overflow column); a justified line ends exactly at the edge, so the last glyph may overshoot by rounding: keep the box half a point narrower */
+.p-rest { column-count: 2; column-gap: 17pt; margin-top: 25.3pt;  margin-right: .5pt; }
+.p-rest > section:first-child > h1 { margin-top: -1.9pt; } /* the first heading sits on the second column's first baseline (measured: 593.0 / 592.5) */
+
+/* headings: Latin Modern Sans; levels 1 bold 11.5, 2 regular 10, 3 italic 10, 4 bold 9.5, 5 regular 9.5; all centred */
+.p-rest section > h1 { font: 400 10pt/12pt "Latin Modern Sans", sans-serif; text-align: center; margin: 11pt 0 6pt; break-after: avoid; }
+:scope > .p-rest > section > h1 { font: 700 10.5pt/13pt "Latin Modern Sans", sans-serif; margin: 16pt 0 5pt; }
+.p-rest > section > section > section > h1 { font-style: italic; font-size: 9.77pt; }
+.p-rest > section > section > section > section > h1 { font-style: normal; font-weight: 700; font-size: 8.94pt; margin-top: 12pt; }
+.p-rest > section > section > section > section > section > h1 { font-weight: 400; font-size: 9.37pt; }
+.katex { font-size: 1em; }
+
+/* lists */
+ul, ol { margin: 4pt 0; padding-left: 14pt; }
+li { margin: 0; text-align: justify; }
+
+/* equations */
+.display_formula { text-align: center; margin: 6pt 0; counter-increment: oupeq; position: relative; }
+.display_formula::after { content: "(" counter(oupeq) ")"; position: absolute; right: 0; top: 50%; }
+
+/* figures and tables */
+figure { margin: 8pt 0; break-inside: avoid; font: 8pt/9.5pt "Latin Modern Sans", sans-serif; }
+figure.wide { column-span: all; }
+figcaption { text-align: left; font: 8pt/9.5pt "Latin Modern Sans", sans-serif; }
+figcaption::before { content: attr(data-label) " "; font-weight: 700; }
+table { border-collapse: collapse; width: 100%; font: 8pt/10pt "Latin Modern Sans", sans-serif; border-top: 1pt solid #000; border-bottom: 1pt solid #000; }
+th { border-bottom: .5pt solid #000; text-align: left; font-weight: 400; }
+.tablenotes p { text-indent: 0; font-size: 6.9pt; line-height: 8.5pt; }
+figcaption[data-label^="Table"] { font-size: 8.5pt; }
+
+/* verbatim, listings */
+pre { font: 8.1pt/9.5pt "Latin Modern Mono", monospace; white-space: pre-wrap; margin: 4pt 0; }
+pre.lst { border: .5pt solid #000; padding: 10pt; }
+code { font-family: "Latin Modern Mono", monospace; font-size: 8.1pt; }
+
+/* theorems, proofs, boxes, algorithms */
+.thm p, .proof p { text-indent: 0; }
+.thm-one .thm-name { font-weight: 700; }
+.thm-one { font-style: italic; }
+.thm-two { font-style: italic; }
+.thm-two .thm-name { font-style: normal; }
+.thm-three .thm-name { font-weight: 700; }
+.proof .qed::after { content: "\25A1"; float: right; }
+.boxtext { border: .5pt solid #000; padding: 6pt 8pt; margin: 8pt 0; font-family: "Latin Modern Sans", sans-serif; }
+.boxtext .box-title { font: 700 9.5pt/11.5pt "Latin Modern Sans", sans-serif; text-indent: 0; }
+.boxtext h2.box-h, .boxtext h3.box-h, .boxtext h4.box-h { font: 700 9pt/11.5pt "Latin Modern Sans", sans-serif; text-align: left; margin: 7pt 0 3pt; }
+.boxtext h3.box-h { font-weight: 400; } .boxtext h4.box-h { font-style: italic; font-weight: 400; }
+.boxtext p { font-size: 7.97pt; line-height: 11pt; }
+.algorithmic p { text-indent: 0; text-align: left; font-size: 7.5pt; }
+.alg-n { display: inline-block; width: 1.5em; }
+.biography p { text-indent: 0; }
+
+/* footnotes at the column foot, and the page-foot block of page 1 (footnotes with no call mark) */
+.p-note { float: footnote; font: 400 8pt/9.5pt "Latin Modern Roman", serif; }
+.p-note::footnote-call { content: attr(data-num); vertical-align: super; font-size: .7em; line-height: 0; }
+.pagedjs_footnote_content .p-note[data-footnote-marker] { list-style: none; }
+.pagedjs_footnote_content a { color: inherit; text-decoration: none; font-family: "Latin Modern Mono", monospace; font-size: 8.1pt; line-height: inherit; }
+.pagedjs_footnote_content .p-note[data-footnote-marker]::before { content: attr(data-num); margin-right: 5pt; vertical-align: super; font-size: .7em; line-height: 0; }
+.pagedjs_footnote_content .p-note { font: 400 8pt/9.5pt "Latin Modern Roman", serif; text-indent: 0; text-align: left; }
+.p-foot { float: footnote; font: 400 7pt/9pt "Latin Modern Sans", sans-serif; }
+.p-foot.p-dates::footnote-call { content: none; }
+.p-foot.p-copy::footnote-call { content: none; }
+.pagedjs_footnote_content .p-foot { list-style: none; text-indent: 0; text-align: left; font: 400 7pt/9pt "Latin Modern Sans", sans-serif; }
+.pagedjs_footnote_content .p-foot[data-footnote-marker]::before { content: none; }
+
+/* references */
+section[role="doc-bibliography"] ul { list-style: none; padding: 0; }
+section[role="doc-bibliography"] li p { text-indent: 0; font-size: 8.8pt; line-height: 11.5pt; }
+blockquote p { font-size: 8.06pt; }
+
+/* links */
+a { color: inherit; text-decoration: none; }
+.latex sup, .latex sub { font-size: .7em; }
+
+/* sidewaystable / sidewaysfigure: one portrait page, the floats turned 90 degrees counter-clockwise (rotating's [figuresright]).
+   The inner box is laid out as a 667 x 525 landscape sheet and turned about its top-left corner; measured on the sample's page 5. */
+.p-sideways { break-before: page; break-after: page; position: relative; height: 667pt; width: 100%; }
+/* top stays 0: an offset taller than the column wraps into the next column fragment; the turn carries the 677 */
+.p-sideways-in { position: absolute; left: 80pt; top: 0; width: 678pt; transform: translateY(677.4pt) rotate(-90deg); transform-origin: 0 0; }
+.p-sideways-in figure { margin: 0 0 24pt; width: 678pt; }
+.p-sideways-in figure:nth-child(1) { margin-bottom: 164pt; }
+.p-sideways-in figcaption, .p-sideways-in table, .p-sideways-in .tablenotes p { font-size: 9pt; line-height: 11pt; }
+.p-sideways-in .ph + figcaption { margin-top: 8pt; }

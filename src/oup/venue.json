@@ -1,0 +1,40 @@
+{
+ "sample": "sample/oup-authoring-template.tex",
+ "dirs": [
+  "class",
+  "sample"
+ ],
+ "media": "sample",
+ "engine": "pdflatex",
+ "fonts": [],
+ "tex": {
+  "authors": "bracket",
+  "frontAfterBegin": true,
+  "fields": {
+   "year": "copyrightyear",
+   "journal": "journaltitle"
+  },
+  "frontCommands": [
+   "title",
+   "address",
+   "author",
+   "copyrightyear",
+   "journaltitle"
+  ],
+  "metaCommands": {
+   "DOI": 1,
+   "pubyear": 1,
+   "vol": 1,
+   "issue": 1,
+   "access": 1,
+   "appnotes": 1,
+   "firstpage": 1,
+   "corresp": 1,
+   "received": 3,
+   "revised": 3,
+   "accepted": 3,
+   "otherabstract": 1,
+   "boxedtext": 2
+  }
+ }
+}

@@ -22,11 +22,11 @@ Known differences (paged PDF), after a pass over the first list: the footnote ma
 
 Sample: `sample/templatePRIME.tex`, converted to RASH, compiled by each output and compared with the reference PDF. Last run 2026-11-25 (`make eval ARGS=arxiv`).
 
-| Output | Compiles | Pages | Undefined refs | Style score | Failed checks | Pixel diff by page |
-|---|---|---|---|---|---|---|
-| reference (official class) | true | 3 | 0 | 1.00 | none | 0.0000 / 0.0000 / 0.0000 |
-| LaTeX (our compiler) | true | 3 | 0 | 1.00 | none | 0.0037 / 0.0616 / 0.0608 |
-| PDF (paged) | true | 3 | 0 | 1.00 | none | 0.0805 / 0.0878 / 0.0553 |
+| Output | Compiles | Pages | Undefined refs | Style score | Failed checks | Pixel diff by page | Word error rate | Character error rate | Line CER | Lines matched | Line ends kept | Same page | dy p95 (pt) | SSIM | Same font size | Text box IoU | Fonts missing / embedded |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| reference (official class) | true | 3 | 0 | 1.00 | none | 0.0000 / 0.0000 / 0.0000 | 0 | 0 | 0 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | none / yes |
+| LaTeX (our compiler) | true | 3 | 0 | 1.00 | none | 0.0037 / 0.0616 / 0.1061 | 0 | 0 | 0 | 1 | 1 | 1 | 123.1 | 0.803 | 1 | 0.938 | none / yes |
+| PDF (paged) | true | 3 | 0 | 1.00 | none | 0.0805 / 0.0878 / 0.1069 | 0.0148 | 0.006 | 0.053 | 0.958 | 0.785 | 1 | 85.8 | 0.693 | 0.938 | 0.9520000000000001 | none / yes |
 
-Style score: share of the checks (page size, fonts, margins, leading, header/footer, title) that match the reference. Pixel diff: share of pixels that differ on each page (0 = identical). Both are measured, never edited by hand.
+Style score: share of the checks (page size, fonts, margins, leading, header/footer, title) that match the reference. Pixel diff: share of pixels that differ on each page (0 = identical). Word error rate: edit distance between the word sequences (letters only: digits, bullets and symbols are ignored) of the PDF and the reference, over the reference words. Character error rate: the same on the letter stream without word boundaries. Line CER: lines aligned first, then letters wrong inside matched lines (unmatched lines wholly wrong); Lines matched: reference lines that found a partner. Line ends kept: share of the reference's line breaks (on aligned words) that fall at the same word. Same page: aligned words on the same page. dy p95: 95th percentile vertical displacement of aligned words. SSIM: mean over pages at 50 dpi. Same font size: aligned words whose box height, relative to the body height, is within 5%. Text box IoU: overlap of the page's text area, mean over pages. All measured, never edited by hand.
 <!-- metrics:end -->

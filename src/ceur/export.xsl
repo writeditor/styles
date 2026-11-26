@@ -9,7 +9,7 @@
   <xsl:variable name="meta" select="head/meta"/>
   <xsl:variable name="creators" select="$meta[@name = 'dc.creator']"/>
   <xsl:text>\documentclass{ceurart}
-\usepackage{listings}
+\usepackage{listings,tabularx}
 \begin{document}
 \copyrightclause{Copyright for this paper by its authors. Use permitted under Creative Commons License Attribution 4.0 International (CC BY 4.0).}
 \conference{</xsl:text><xsl:value-of select="$meta[@property = 'writ:ceur.conference']/@content"/><xsl:text>}

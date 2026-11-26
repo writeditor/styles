@@ -8,3 +8,6 @@ src/arxiv/sample/
 # CEUR-WS: third-party class and sample (see src/ceur/SOURCE.txt)
 src/ceur/class/*
 src/ceur/sample/
+# Oxford University Press: third-party class and sample (see src/oup/SOURCE.txt)
+src/oup/class/*
+src/oup/sample/

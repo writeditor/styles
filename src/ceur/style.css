@@ -100,7 +100,7 @@ section section section > h1 {
   margin-bottom: 6.5pt;
 }
 section section section:has(+ section) {
-  margin-bottom: 15.5pt;
+  margin-bottom: 12pt;
 }
 :scope > section:not([role]):not([data-un]) > h1::before {
   content: counter(h1) ".\2003";
@@ -128,6 +128,13 @@ li > p {
 }
 li > pre {
   margin-left: 0;
+  margin-bottom: 5pt; /* a listing inside an item, with text after it: ruler, 0.5 pt per block */
+}
+li > pre.lst {
+  margin-top: 5pt;
+}
+li > pre:last-child {
+  margin-bottom: 6.5pt;
 }
 pre {
   margin: 11pt 0 6pt;
@@ -205,9 +212,11 @@ pre {
   counter-reset: footnote 1; /* the page-foot block's notes are Paged.js footnotes too, but the numbering starts at the first real note */
 }
 .p-note::footnote-call {
-  vertical-align: super;
-  font-size: .7em;
+  font-variant-position: normal; /* Paged.js turns on the font's superscript glyphs: raising and shrinking them again makes a speck */
+  vertical-align: 4pt;
+  font-size: 7.5pt;
   line-height: 0;
+  color: #2f4f4f; /* hyperref's link colour: the reference prints the call as a link */
 }
 @page {
   @footnote {
@@ -249,15 +258,9 @@ pre {
 .pagedjs_footnote_content i.fa-r {
   font-weight: 400;
 }
-.pagedjs_footnote_content .orcid {
-  display: inline-block;
-  width: 9pt;
-  height: 9pt;
-  border-radius: 50%;
-  background: #000;
-  color: #fff;
-  font: 700 5.5pt/9pt "Libertinus Sans", sans-serif;
-  text-align: center;
+.pagedjs_footnote_content i.fa-b {
+  font-family: "Font Awesome 5 Brands";
+  font-weight: 400;
 }
 .pagedjs_footnote_content a {
   color: #2f4f4f;
